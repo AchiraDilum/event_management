@@ -140,13 +140,20 @@
                             <td><?php echo htmlspecialchars($user['email']); ?></td>
                             <td><?php echo $user['is_admin_display']; ?></td>
                             <td>
-                                <button class="action-btn edit-user-btn" 
-                                        data-user-id="<?php echo $user['id']; ?>"
-                                        data-name="<?php echo htmlspecialchars($user['user_name']); ?>"
-                                        data-email="<?php echo htmlspecialchars($user['email']); ?>"
-                                        data-is-admin="<?php echo $user['is_admin']; ?>">
-                                    Edit
-                                </button>
+                                <?php
+                                    // Show Edit button only if:
+                                    // 1) User is not an admin OR
+                                    // 2) User is the currently logged-in admin themselves
+                                    if (!$user['is_admin'] || $user['user_name'] === $current_user): ?>
+                                        <button class="action-btn edit-user-btn" 
+                                                data-user-id="<?php echo $user['id']; ?>"
+                                                data-name="<?php echo htmlspecialchars($user['user_name']); ?>"
+                                                data-email="<?php echo htmlspecialchars($user['email']); ?>"
+                                                data-is-admin="<?php echo $user['is_admin']; ?>">
+                                            Edit
+                                        </button>
+                                    <?php endif; ?>
+
                                 <form action="process_user.php" method="POST" style="display: inline;">
                                     <input type="hidden" name="action" value="delete">
                                     <input type="hidden" name="user_id" value="<?php echo $user['id']; ?>">
