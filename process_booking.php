@@ -99,7 +99,7 @@
         }
 
     } catch (\PDOException $e) {
-        if ($pdo->inTransaction()) { $pdo->rollBack(); } // Rollback on error
+        if ($pdo->inTransaction()) { $pdo->rollBack(); }
         $_SESSION['message'] = ['type' => 'error', 'text' => 'Database error during booking process. Please try again.'];
         error_log("Booking Error: " . $e->getMessage());
 

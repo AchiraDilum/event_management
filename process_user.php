@@ -3,8 +3,7 @@
     session_start();
 
     require 'db_con.php';
-    $target_db = 'event_management'; 
-
+    $target_db = 'event_management';
 
     $action = $_POST['action'] ?? '';
     $user_id = $_POST['user_id'] ?? null;
@@ -82,7 +81,6 @@
     } finally {
         if ($pdo) { close_db_connection($pdo); }
     }
-
 
     header('Location: ' . $redirect_url);
     exit;

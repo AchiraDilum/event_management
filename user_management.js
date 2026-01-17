@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
         userEmailField.value = '';
         userPasswordField.value = '';
 
-        userPasswordField.removeAttribute('required'); 
+        userPasswordField.removeAttribute('required');
         userIsAdminField.checked = false;
     }
 
@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
             userAction.value = 'create';
             userIdField.value = '';
 
-            userPasswordField.setAttribute('required', 'required'); 
+           userPasswordField.setAttribute('required', 'required');
             userModal.style.display = 'flex';
         });
     }

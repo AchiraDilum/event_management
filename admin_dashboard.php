@@ -16,7 +16,7 @@
         $_SESSION = array();
         session_destroy();
         session_start();
-        $_SESSION['admin_login_error'] = $access_denied_message; 
+        $_SESSION['login_error'] = $access_denied_message;
         header('Location: index.php'); 
         exit;
     }
@@ -268,7 +268,7 @@
 
                 <label for="user_password">Password:</label>
                 <input type="password" id="user_password" name="password">
-                
+
                 <div style="margin-top: 15px;">
                     <input type="checkbox" id="user_is_admin" name="is_admin" value="1" style="width: auto; margin-right: 5px;">
                     <label for="user_is_admin" style="display: inline;">Grant Administrator Privileges</label>

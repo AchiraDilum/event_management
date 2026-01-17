@@ -7,7 +7,7 @@
 
     if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== TRUE) {
         $_SESSION['login_error'] = 'Access denied. Please log in.';
-        header('Location: login.php');
+        header('Location: index.php');
         exit;
     }
 

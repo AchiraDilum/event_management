@@ -5,7 +5,7 @@
     
     $target_db = 'event_management';
     $redirect_login = 'index.php';
-    $redirect_dashboard = 'dashboard.php'
+    $redirect_dashboard = 'dashboard.php';
 
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
         header('Location: ' . $redirect_login . '?mode=register');
@@ -20,20 +20,12 @@
 
     if (empty($username) || empty($email) || empty($password) || empty($confirm_password)) {
         $_SESSION['register_error'] = "All fields are required.";
-        header('Location: ' . $redirect_login . '?mode=register');
         exit;
     }
     if ($password !== $confirm_password) {
         $_SESSION['register_error'] = "Passwords do not match.";
-        header('Location: ' . $redirect_login . '?mode=register');
         exit;
     }
-    if (strlen($password) < 6) {
-         $_SESSION['register_error'] = "Password must be at least 6 characters long.";
-        header('Location: ' . $redirect_login . '?mode=register');
-        exit;
-    }
-
 
     $pdo = null;
     try {
