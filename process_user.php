@@ -2,15 +2,7 @@
 
     session_start();
 
-
-    if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== TRUE) {
-
-        header('Location: admin_login.php');
-        exit;
-    }
-
-
-    require 'db_con.php'; 
+    require 'db_con.php';
     $target_db = 'event_management'; 
 
 
@@ -36,19 +28,7 @@
 
             $is_admin = isset($_POST['is_admin']) ? 1 : 0; 
 
-            if (empty($username) || empty($email)) {
-                $_SESSION['message'] = ['type' => 'error', 'text' => 'Username and Email are required.'];
-                header('Location: ' . $redirect_url);
-                exit;
-            }
-
             if ($action === 'create') {
-                if (empty($password)) {
-                    $_SESSION['message'] = ['type' => 'error', 'text' => 'Password is required for new users.'];
-                    header('Location: ' . $redirect_url);
-                    exit;
-                }
-                
 
                 $sql = "INSERT INTO {$target_db}.users (user_name, email, password, is_admin) VALUES (?, ?, ?, ?)";
                 $stmt = $pdo->prepare($sql);

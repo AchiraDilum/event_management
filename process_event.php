@@ -2,12 +2,6 @@
 
     session_start();
 
-
-    if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== TRUE) {
-        header('Location: admin_login.php');
-        exit;
-    }
-
     require 'db_con.php'; 
     $target_db = 'event_management'; 
 
@@ -15,11 +9,6 @@
     $action = $_POST['action'] ?? '';
     $event_id = $_POST['event_id'] ?? null;
     $redirect_url = 'admin_dashboard.php?tab=events'; 
-
-    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-        header('Location: ' . $redirect_url);
-        exit;
-    }
 
     $pdo = null;
     try {

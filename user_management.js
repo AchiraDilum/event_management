@@ -23,9 +23,6 @@ document.addEventListener('DOMContentLoaded', function() {
         userPasswordField.removeAttribute('required'); 
         userIsAdminField.checked = false;
     }
-    
-
-
 
     if (openCreateUserModal) {
         openCreateUserModal.addEventListener('click', function() {
@@ -40,7 +37,6 @@ document.addEventListener('DOMContentLoaded', function() {
             userModal.style.display = 'flex';
         });
     }
-
 
     document.querySelectorAll('.edit-user-btn').forEach(button => {
         button.addEventListener('click', function() {

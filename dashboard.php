@@ -2,10 +2,8 @@
 
     session_start();
 
-
     require 'db_con.php'; 
-    $target_db = 'event_management'; 
-
+    $target_db = 'event_management';
 
     if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== TRUE) {
         $_SESSION['login_error'] = 'Access denied. Please log in.';
@@ -31,7 +29,7 @@
                     b.tickets_booked,
                     e.event_name,
                     e.date,
-                    e.status AS event_status  -- Retrieve event status from the events table
+                    e.status AS event_status
                 FROM
                     {$target_db}.bookings b
                 JOIN
@@ -128,7 +126,7 @@
                                             <input type="hidden" name="action" value="cancel_user_booking">
                                             <input type="hidden" name="booking_id" value="<?php echo $booking['booking_id']; ?>">
                                             <button type="submit" name="cancel_booking" style="background-color: #dc3545; color: white; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer;" onclick="return confirm('Are you sure you want to cancel this booking?');">
-                                                ❌ Cancel Booking
+                                                Cancel Booking
                                             </button>
                                         </form>
                                     <?php else: ?>

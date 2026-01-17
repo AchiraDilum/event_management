@@ -1,14 +1,12 @@
 <?php
 
-    session_start();
-    
-
     $display_username = $_SESSION['username'] ?? 'User';
     $is_admin = $_SESSION['is_admin'] ?? FALSE; 
     
 
     $dashboard_link = 'dashboard.php';
     $admin_link = 'admin_dashboard.php';
+    $help_link = 'help.php';
     $logout_link = 'logout.php'; 
 
 
@@ -17,6 +15,7 @@
 
     $dashboard_active = ($current_page === 'dashboard.php') ? 'active' : '';
     $admin_active = ($current_page === 'admin_dashboard.php') ? 'active' : '';
+    $help_active = ($current_page === 'help.php') ? 'active' : '';
 ?>
 
 <link rel="stylesheet" href="header_style.css">
@@ -96,15 +95,15 @@
 <div class="header-bar">
     
     <div class="header-left">
-        <div class="header-title">Event Manager Pro</div>
+        <div class="header-title">Event Manager</div>
 
         <nav class="main-nav">
             <ul>
                 <li><a href="<?php echo $dashboard_link; ?>" class="<?php echo $dashboard_active; ?>">My Bookings</a></li>
-
                 <?php if ($is_admin): ?>
                     <li><a href="<?php echo $admin_link; ?>" class="<?php echo $admin_active; ?>">Admin Panel</a></li>
                 <?php endif; ?>
+                <li><a href="<?php echo $help_link; ?>" class="<?php echo $help_active; ?>">Help</a></li>
             </ul>
         </nav>
         </div>
