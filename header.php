@@ -22,12 +22,9 @@
 <link rel="stylesheet" href="header_style.css">
 
 <style>
-    /* --- REVISED INLINE STYLES --- */
+
     .header-bar {
         display: flex;
-        /* CHANGE 1: Use flex-start to push items to the left, but we will 
-           revert this later to space-between and control the nav directly. 
-           We will use space-between to keep the title and user menu separate. */
         justify-content: space-between; 
         align-items: center;
         padding: 10px 20px;
@@ -35,14 +32,14 @@
         color: white;
     }
     
-    /* NEW: Container to group the Title and the Tabs */
+
     .header-left {
         display: flex;
         align-items: center;
-        gap: 25px; /* Space between title and navigation */
+        gap: 25px;
     }
 
-    /* Style for the new navigation bar */
+
     .main-nav ul {
         list-style: none;
         padding: 0;
@@ -64,13 +61,13 @@
         background-color: #495057;
     }
     
-    /* CHANGE 2: Styling for the active tab */
+
     .main-nav ul li a.active {
-        background-color: #007bff; /* Highlight color for active tab */
+        background-color: #007bff;
         font-weight: bold;
     }
 
-    /* Adjust the user menu to align properly */
+
     .user-menu {
         position: relative;
         cursor: pointer;
