@@ -49,6 +49,13 @@
 
 
         $_SESSION['login_success'] = "Registration successful! Please log in.";
+
+        $new_user_id = $pdo->lastInsertId();
+        $_SESSION['loggedin'] = TRUE;
+        $_SESSION['user_id'] = $new_user_id;
+        $_SESSION['username'] = $username;
+        $_SESSION['is_admin'] = false;
+
         header('Location: ' . $redirect_dashboard);
         exit;
 
