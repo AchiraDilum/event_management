@@ -1,18 +1,17 @@
 <?php
-    // index.php - Unified Login Screen
+
     session_start();
 
-    // Check if the user is already logged in
+
     if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === TRUE) {
         header('Location: dashboard.php');
         exit;
     }
     
-    // Check for messages (e.g., login errors from the processor)
+
     $message = $_SESSION['login_error'] ?? null;
     unset($_SESSION['login_error']);
 
-    // Assuming we use a common style.css
 ?>
 <!DOCTYPE html>
 <html lang="en">

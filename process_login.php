@@ -1,8 +1,8 @@
 <?php
-    // process_login.php - Central Authentication Handler (INSECURE - TEMPORARY FIX)
+
     session_start();
     
-    // Redirect if already logged in 
+
     if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === TRUE) {
         header('Location: dashboard.php'); 
         exit;
@@ -25,21 +25,21 @@
             try {
                 $pdo = open_db_connection(); 
 
-                // CORRECTED SQL: Only check the user_name column
+
                 $sql = "SELECT id, user_name, password, is_admin FROM {$target_db}.users WHERE user_name = ?";
                 
                 $stmt = $pdo->prepare($sql);
                 
-                // CORRECTED EXECUTE: Only pass the input variable once
+
                 $stmt->execute([$username_or_email]);
                 $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
                 close_db_connection($pdo);
                 
-                // Compare the plain-text password directly
+
                 if ($user && $password === $user['password']) {
                     
-                    // Success: Create session variables
+
                     $_SESSION['loggedin'] = TRUE;
                     $_SESSION['user_id'] = $user['id'];
                     $_SESSION['username'] = $user['user_name']; 

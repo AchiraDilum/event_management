@@ -1,5 +1,5 @@
 <?php
-    // process_register.php - Handles new user creation
+
     session_start();
     require 'db_con.php'; 
     
@@ -17,7 +17,7 @@
     $password = $_POST['password'] ?? '';
     $confirm_password = $_POST['confirm_password'] ?? '';
 
-    // --- Validation ---
+
     if (empty($username) || empty($email) || empty($password) || empty($confirm_password)) {
         $_SESSION['register_error'] = "All fields are required.";
         header('Location: ' . $redirect_login . '?mode=register');
@@ -34,12 +34,12 @@
         exit;
     }
 
-    // --- Database Check and Insertion ---
+
     $pdo = null;
     try {
         $pdo = open_db_connection();
 
-        // Check if username or email already exists (using positional placeholders '?' is safer)
+
         $check_sql = "SELECT id FROM {$target_db}.users WHERE user_name = ? OR email = ?";
         $check_stmt = $pdo->prepare($check_sql);
         $check_stmt->execute([$username, $email]);
@@ -50,12 +50,12 @@
             exit;
         }
         
-        // Insert new user (is_admin defaults to 0/FALSE)
+
         $insert_sql = "INSERT INTO {$target_db}.users (user_name, email, password, is_admin) VALUES (?, ?, ?, 0)";
         $insert_stmt = $pdo->prepare($insert_sql);
         $insert_stmt->execute([$username, $email, $password]);
 
-        // Success
+
         $_SESSION['login_success'] = "Registration successful! Please log in.";
         header('Location: ' . $redirect_dashboard);
         exit;

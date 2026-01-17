@@ -1,12 +1,12 @@
 <?php
-    // dashboard.php - User Event Dashboard
+
     session_start();
 
-    // --- 1. DB Connection and Setup ---
+
     require 'db_con.php'; 
     $target_db = 'event_management'; 
 
-    // --- 2. PROTECTION CHECK ---
+
     if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== TRUE) {
         $_SESSION['login_error'] = 'Access denied. Please log in.';
         header('Location: login.php');
@@ -14,9 +14,8 @@
     }
 
     $current_user = $_SESSION['username'] ?? 'Guest';
-    $user_id = $_SESSION['user_id'] ?? null; // Assume user_id is stored in the session
-    
-    // --- 3. DATA FETCHING ---
+    $user_id = $_SESSION['user_id'] ?? null;
+
     $all_available_events = []; 
     $booked_events = [];
     $db_error_message = null;
@@ -24,8 +23,7 @@
     $pdo = null;
     try {
         $pdo = open_db_connection();
-        
-        // --- Fetch User's Booked Events with Event Status ---
+
         if ($user_id) {
             $booking_sql = "
                 SELECT
@@ -48,8 +46,6 @@
             $booked_events = $booking_stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
-        // --- Fetch All Active Events for the Booking Modal ---
-        // Only allow booking for 'Active' events
         $event_sql = "SELECT id, event_name, date, number_of_tickets FROM {$target_db}.events WHERE status = 'Active' ORDER BY date ASC";
         $event_stmt = $pdo->query($event_sql);
         $all_available_events = $event_stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -114,7 +110,7 @@
                             <?php foreach ($booked_events as $booking): 
                                 $status = htmlspecialchars($booking['event_status']);
                                 $status_class = 'status-' . $status;
-                                // Only allow cancellation if the event is Active
+
                                 $can_cancel = $status === 'Active'; 
                             ?>
                             <tr>

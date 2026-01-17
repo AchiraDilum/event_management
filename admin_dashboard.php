@@ -1,19 +1,15 @@
 <?php
-    // admin_dashboard.php - Complete Admin Panel with DB Integration and Modals
     session_start();
-    
-    // --- 1. DB Connection and Setup ---
+
     require 'db_con.php'; 
     $target_db = 'event_management'; 
 
-    // --- 2. AUTHENTICATION AND AUTHORIZATION ---
     if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== TRUE) {
         $_SESSION['admin_login_error'] = 'Access denied. Please log in.';
-        header('Location: index.php'); // Redirect to admin login
+        header('Location: index.php');
         exit;
     }
-    
-    // 2.2. CRITICAL CHECK: Restrict access to non-admin users
+
     if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== TRUE) {
         $access_denied_message = 'Access Denied: You do not have administrator privileges to view this page.';
         error_log("Unauthorized Access Attempt: Non-admin user " . ($_SESSION['username'] ?? 'N/A') . " tried to access admin dashboard.");
@@ -26,12 +22,10 @@
     }
 
     $current_user = $_SESSION['username'] ?? 'Admin User';
-    
-    // --- 3. FLASH MESSAGE HANDLING ---
+
     $message = $_SESSION['message'] ?? null;
     unset($_SESSION['message']);
-    
-    // --- 4. DATA FETCHING ---
+
     $all_events = [];
     $all_users = [];
     $db_error_message = null;
@@ -39,12 +33,10 @@
     $pdo = null;
     try {
         $pdo = open_db_connection();
-        // Fetch All Events from the 'events' table
         $event_sql = "SELECT id, event_name, date, number_of_tickets, status FROM {$target_db}.events ORDER BY date DESC";
         $event_stmt = $pdo->query($event_sql);
         $all_events = $event_stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        // Fetch All Users from the 'users' table
         $user_sql = "SELECT id, user_name, email, is_admin FROM {$target_db}.users ORDER BY id ASC";
         $user_stmt = $pdo->query($user_sql);
         $raw_users = $user_stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -60,8 +52,7 @@
     } finally {
         if ($pdo) { close_db_connection($pdo); }
     }
-    
-    // Determine which tab is active (default to 'users')
+
     $active_tab = $_GET['tab'] ?? 'users'; 
 ?>
 
@@ -72,7 +63,6 @@
     <title>Admin Panel - Event Management</title>
     <link rel="stylesheet" href="admin_dashboard_style.css">
      <script>
-        // Function to close any modal when clicking the overlay
         document.querySelectorAll('.modal-overlay').forEach(modal => {
             modal.addEventListener('click', function(e) {
                 if (e.target === modal) {
@@ -141,9 +131,7 @@
                             <td><?php echo $user['is_admin_display']; ?></td>
                             <td>
                                 <?php
-                                    // Show Edit button only if:
-                                    // 1) User is not an admin OR
-                                    // 2) User is the currently logged-in admin themselves
+
                                     if (!$user['is_admin'] || $user['user_name'] === $current_user): ?>
                                         <button class="action-btn edit-user-btn" 
                                                 data-user-id="<?php echo $user['id']; ?>"

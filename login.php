@@ -1,14 +1,14 @@
 <?php
-    // login.php (Updated to handle admin status)
+
     session_start();
     
-    // Existing logic to redirect if already logged in...
+
     if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === TRUE) {
         header('Location: dashboard.php');
         exit;
     }
     
-    // Include the connection functions file
+
     require 'db_con.php'; 
 
     $login_error = '';
@@ -26,7 +26,7 @@
             try {
                 $pdo = open_db_connection(); 
 
-                // CRITICAL CHANGE: Select the new 'is_admin' column
+
                 $sql = "SELECT id, user_name, password, is_admin FROM {$target_db}.users WHERE user_name = ?";
                 
                 $stmt = $pdo->prepare($sql);
@@ -36,15 +36,15 @@
                 close_db_connection($pdo); 
                 
                 if ($user && $password === $user['password']) {
-                    // Success: Create session variables
+
                     $_SESSION['loggedin'] = TRUE;
                     $_SESSION['user_id'] = $user['id'];
                     $_SESSION['username'] = $user['user_name']; 
                     
-                    // CRITICAL CHANGE: Store the admin status in the session
+
                     $_SESSION['is_admin'] = (bool)$user['is_admin']; 
                     
-                    // Redirect to the protected dashboard
+
                     header('Location: dashboard.php');
                     exit;
                 } else {

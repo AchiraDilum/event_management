@@ -1,4 +1,4 @@
- /* (CSS styles remain mostly unchanged, adding status colors) */
+
         .dashboard-container { 
             width: 100%; 
             margin: 0 auto;
@@ -21,7 +21,7 @@
         th, td { padding: 10px; border: 1px solid #ddd; text-align: left; }
         .tabs button { padding: 10px 15px; background-color: #f4f4f4; border: 1px solid #ccc; border-bottom: none; border-top-left-radius: 6px; border-top-right-radius: 6px; cursor: pointer; font-weight: bold; }
 
-        /* New Status Styles */
+
         .status-Active { color: #28a745; font-weight: bold; }
         .status-Cancelled { color: #dc3545; font-weight: bold; }
         .action-disabled { color: #6c757d; font-style: italic; }

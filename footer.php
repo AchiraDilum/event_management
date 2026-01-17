@@ -1,10 +1,9 @@
 <?php
-    // footer.php (Minimal CSS remains)
+
     $current_year = date("Y"); 
 ?>
 
 <link rel="stylesheet" href="footer_style.css">
-
 <footer class="footer-bar">
     <div class="footer-links">
         <a href="#">About Us</a> |

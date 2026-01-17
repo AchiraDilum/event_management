@@ -1,14 +1,14 @@
 <?php
-    // register.php - Dedicated Registration Screen
+
     session_start();
 
-    // If the user is already logged in, redirect to the dashboard
+
     if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === TRUE) {
         header('Location: dashboard.php');
         exit;
     }
     
-    // Check for registration errors from the processor
+
     $error = $_SESSION['register_error'] ?? null;
     unset($_SESSION['register_error']);
 ?>

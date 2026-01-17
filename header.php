@@ -1,21 +1,20 @@
 <?php
-    // header.php
+
     session_start();
     
-    // 1. Define necessary variables
+
     $display_username = $_SESSION['username'] ?? 'User';
     $is_admin = $_SESSION['is_admin'] ?? FALSE; 
     
-    // 2. Define links (direct file names since all files are in the root)
+
     $dashboard_link = 'dashboard.php';
     $admin_link = 'admin_dashboard.php';
     $logout_link = 'logout.php'; 
 
-    // 3. PHP Logic for Active Tab Highlighting
-    // Get the current page file name (e.g., "dashboard.php")
+
     $current_page = basename($_SERVER['PHP_SELF']);
     
-    // Set active class variables
+
     $dashboard_active = ($current_page === 'dashboard.php') ? 'active' : '';
     $admin_active = ($current_page === 'admin_dashboard.php') ? 'active' : '';
 ?>
